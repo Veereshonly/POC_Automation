@@ -14,6 +14,14 @@ Sign In Positive Test case
     ${response}=      Make Post Request and validate response code     ${expected_status_code}     ${path}     &{data}
     Validate positive sign in response       ${response}
 
+Sign In Positive Test case with playload in query string
+    [Documentation]     Test to check positive sign in scenario with playload in query string
+    ...                 Author-Veeresh
+    [Tags]              Sign In Positive Test case        positive
+    ${expected_status_code}=      Set Variable     200
+    ${path}=     Set Variable     login?email=sagar3@amagi.com&password=Amagi@123
+    ${response}=      Make Post Request and validate response code     ${expected_status_code}     ${path}     &{EMPTY}
+    Validate positive sign in response       ${response}
 
 Sign In Negative Test Case Empty value for Email address valid password
      [Documentation]     Test to check negative sign in scenario - Empty Email address valid password
