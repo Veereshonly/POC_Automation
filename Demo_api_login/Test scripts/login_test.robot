@@ -12,16 +12,19 @@ Sign In Positive Test case
     &{data}=      create dictionary       email=${email}  password=${password}
     ${path}=     Set Variable     login
     ${response}=      Make Post Request and validate response code     ${expected_status_code}     ${path}     &{data}
-    Validate positive sign in response       ${response}
+    Validate Response Values       ${response}      ../Resources/positive_response.json
+    Validate Response Schema and Execution Time       ${response}       ../Resources/valid_response_schema.json
+
 
 Sign In Positive Test case with playload in query string
     [Documentation]     Test to check positive sign in scenario with playload in query string
     ...                 Author-Veeresh
-    [Tags]              Sign In Positive Test case        positive
+    [Tags]              Sign In Positive Test case with playload in query string        positive
     ${expected_status_code}=      Set Variable     200
     ${path}=     Set Variable     login?email=sagar3@amagi.com&password=Amagi@123
     ${response}=      Make Post Request and validate response code     ${expected_status_code}     ${path}     &{EMPTY}
-    Validate positive sign in response       ${response}
+    Validate Response Values       ${response}      ../Resources/positive_response.json
+    Validate Response Schema and Execution Time      ${response}       ../Resources/valid_response_schema.json
 
 Sign In Negative Test Case Empty value for Email address valid password
      [Documentation]     Test to check negative sign in scenario - Empty Email address valid password
@@ -31,7 +34,8 @@ Sign In Negative Test Case Empty value for Email address valid password
      &{data}=      create dictionary       email=${empty_email}  password=${password}
      ${path}=     Set Variable     login
      ${response}=      Make Post Request and validate response code        ${expected_status_code}      ${path}     &{data}
-     Validate negative response    ${response}
+      Validate Response Values       ${response}      ../Resources/negative_response.json
+      Validate Response Schema and Execution Time       ${response}       ../Resources/invalid_response_schema.json
 
 
 Sign In Negative Test Case Valid Email address empty value for password
@@ -42,7 +46,8 @@ Sign In Negative Test Case Valid Email address empty value for password
      &{data}=      create dictionary       email=${email}  password=$${empty_password}
      ${path}=     Set Variable     login
      ${response}=      Make Post Request and validate response code     ${expected_status_code}      ${path}     &{data}
-     Validate negative response    ${response}
+     Validate Response Values       ${response}      ../Resources/negative_response.json
+     Validate Response Schema and Execution Time       ${response}       ../Resources/invalid_response_schema.json
 
 Sign In Negative Test Case Empty value for Email address empty value for password
      [Documentation]     Test to check negative sign in scenario - Valid Email address empty password
@@ -52,7 +57,8 @@ Sign In Negative Test Case Empty value for Email address empty value for passwor
      &{data}=      create dictionary       email=${empty_email}  password=$${empty_password}
      ${path}=     Set Variable     login
      ${response}=      Make Post Request and validate response code     ${expected_status_code}      ${path}     &{data}
-     Validate negative response    ${response}
+     Validate Response Values       ${response}      ../Resources/negative_response.json
+     Validate Response Schema and Execution Time       ${response}       ../Resources/invalid_response_schema.json
 
 Sign In Negative Test Case Invalid value for Email address valid value for password
      [Documentation]     Test to check negative sign in scenario - InValid Email address empty password
@@ -62,7 +68,8 @@ Sign In Negative Test Case Invalid value for Email address valid value for passw
      &{data}=      create dictionary       email=${invalid_email}  password=$${password}
      ${path}=     Set Variable     login
      ${response}=      Make Post Request and validate response code     ${expected_status_code}      ${path}     &{data}
-     Validate negative response    ${response}
+     Validate Response Values       ${response}      ../Resources/negative_response.json
+     Validate Response Schema and Execution Time       ${response}       ../Resources/invalid_response_schema.json
 
 Sign In Negative Test Case Valid value for Email address Invalid value for password
      [Documentation]     Test to check negative sign in scenario - InValid Email address empty password
@@ -72,7 +79,8 @@ Sign In Negative Test Case Valid value for Email address Invalid value for passw
      &{data}=      create dictionary       email=${email}  password=$${invalid_password}
      ${path}=     Set Variable     login
      ${response}=      Make Post Request and validate response code     ${expected_status_code}      ${path}     &{data}
-     Validate negative response    ${response}
+     Validate Response Values       ${response}      ../Resources/negative_response.json
+     Validate Response Schema and Execution Time       ${response}       ../Resources/invalid_response_schema.json
 
 Sign In Negative Test Case Invalid value for Email address Invalid value for password
      [Documentation]     Test to check negative sign in scenario - InValid Email address empty password
@@ -82,7 +90,8 @@ Sign In Negative Test Case Invalid value for Email address Invalid value for pas
      &{data}=      create dictionary       email=${invalid_email}  password=$${invalid_password}
      ${path}=     Set Variable     login
      ${response}=      Make Post Request and validate response code     ${expected_status_code}      ${path}     &{data}
-     Validate negative response    ${response}
+     Validate Response Values       ${response}      ../Resources/negative_response.json
+     Validate Response Schema and Execution Time       ${response}       ../Resources/invalid_response_schema.json
 
 Sign In Negative Test Case With Additional Key in Payload
      [Documentation]      Test to check negative sign in scenario - Additional key in payload
@@ -92,6 +101,8 @@ Sign In Negative Test Case With Additional Key in Payload
      &{data}=      create dictionary       email=${email}  password=${password}    thirdvalue=additonal value
      ${path}=     Set Variable     login
      ${response}=      Make Post Request and validate response code       ${expected_status_code}     ${path}     &{data}
+     Validate Response Values       ${response}      ../Resources/negative_response.json
+     Validate Response Schema and Execution Time       ${response}       ../Resources/invalid_response_schema.json
 
 Sign In Negative Test Case With Invalid REST method
      [Documentation]      Test to check negative sign in scenario - Invalid REST method
@@ -101,6 +112,8 @@ Sign In Negative Test Case With Invalid REST method
      &{data}=      create dictionary       email=${email}  password=$${password}
      ${path}=     Set Variable     login
      ${response}=      Make Put Request with additonal key and validate response code     ${expected_status_code}      ${path}     &{data}
+     Validate Response Values       ${response}      ../Resources/negative_response.json
+     Validate Response Schema and Execution Time       ${response}       ../Resources/invalid_response_schema.json
 
 Sign In Negative Case With Invalid key for password in paylaod
      [Documentation]      Test to check negative sign in scenario - Invalid key for password in paylaod
@@ -110,7 +123,8 @@ Sign In Negative Case With Invalid key for password in paylaod
      &{data}=      create dictionary       email=${email}  access_key=${password}    thirdvalue=additonal value
      ${path}=     Set Variable     login
      ${response}=      Make Post Request and validate response code       ${expected_status_code}     ${path}    &{data}
-     Validate negative response    ${response}
+     Validate Response Values       ${response}      ../Resources/negative_response.json
+     Validate Response Schema and Execution Time       ${response}       ../Resources/invalid_response_schema.json
 
 Sign In Negative Case With Invalid key for email in paylaod
      [Documentation]      Test to check negative sign in scenario - Invalid key for email in paylaod
@@ -120,7 +134,8 @@ Sign In Negative Case With Invalid key for email in paylaod
      &{data}=      create dictionary       user_name=${email}  access_key=${password}    thirdvalue=additonal value
      ${path}=     Set Variable     login
      ${response}=      Make Post Request and validate response code       ${expected_status_code}     ${path}     &{data}
-     Validate negative response    ${response}
+     Validate Response Values       ${response}      ../Resources/negative_response.json
+     Validate Response Schema and Execution Time       ${response}       ../Resources/invalid_response_schema.json
 
 Sign In Negative Case Without Email in paylod
      [Documentation]      Test to check negative sign in scenario - Without email in payload
@@ -130,7 +145,8 @@ Sign In Negative Case Without Email in paylod
      &{data}=      create dictionary       passowrd=${password}
      ${path}=     Set Variable     login
      ${response}=      Make Post Request and validate response code       ${expected_status_code}     ${path}    &{data}
-     Validate negative response    ${response}
+     Validate Response Values       ${response}      ../Resources/negative_response.json
+     Validate Response Schema and Execution Time       ${response}       ../Resources/invalid_response_schema.json
 
 Sign In Negative Case Without Password in paylod
      [Documentation]      Test to check negative sign in scenario - Without password in payload
@@ -140,7 +156,8 @@ Sign In Negative Case Without Password in paylod
      &{data}=      create dictionary       email=${email}
      ${path}=     Set Variable     login
      ${response}=      Make Post Request and validate response code       ${expected_status_code}     ${path}    &{data}
-     Validate negative response    ${response}
+     Validate Response Values       ${response}      ../Resources/negative_response.json
+     Validate Response Schema and Execution Time       ${response}       ../Resources/invalid_response_schema.json
 
 Sign In Negative Case with empty payload
      [Documentation]       Test to check negative sign in scenario - Empty payload
@@ -149,7 +166,8 @@ Sign In Negative Case with empty payload
      ${expected_status_code}=      Set Variable     400
      ${path}=     Set Variable     login
      ${response}=      Make Post Request and validate response code       ${expected_status_code}     ${path}    &{EMPTY}
-     Validate negative response    ${response}
+     Validate Response Values       ${response}      ../Resources/negative_response.json
+     Validate Response Schema and Execution Time       ${response}       ../Resources/invalid_response_schema.json
 
 Sign In Negative Case with Invalid path
      [Documentation]       Test to check negative sign in scenario - Empty payload
@@ -159,7 +177,8 @@ Sign In Negative Case with Invalid path
      &{data}=      create dictionary       user_name=${email}  password=${password}
      ${path}=     Set Variable     logout
      ${response}=      Make Post Request and validate response code       ${expected_status_code}     ${path}     &{data}
-     Validate negative 404 response    ${response}
+     Validate Response Values       ${response}      ../Resources/negative_response.json
+     Validate Response Schema and Execution Time       ${response}       ../Resources/invalid_response_schema.json
 
 Sign In Negative Case with Empty path
      [Documentation]       Test to check negative sign in scenario - Empty payload
@@ -169,7 +188,8 @@ Sign In Negative Case with Empty path
      &{data}=      create dictionary       user_name=${email}  password=${password}
      ${path}=     Set Variable     ${EMPTY}
      ${response}=      Make Post Request and validate response code       ${expected_status_code}     ${path}     &{data}
-     Validate negative 404 response    ${response}
+     Validate Response Values       ${response}      ../Resources/negative_response.json
+     Validate Response Schema and Execution Time       ${response}       ../Resources/invalid_response_schema.json
 
 Sign In Negative Case with empty key for email
     [Documentation]      Test to check negative sign in scenario - Empty key for email
@@ -197,3 +217,5 @@ Sign In Negative Case with empty key for password
     &{data}=      create dictionary       email=${email}  ${EMPTY}=${password}
     ${path}=     Set Variable     login
     ${response}=      Make Post Request and validate response code       ${expected_status_code}     ${path}     &{data}
+    Validate Response Values       ${response}      ../Resources/negative_response.json
+    Validate Response Schema and Execution Time       ${response}       ../Resources/invalid_response_schema.json
